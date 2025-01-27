@@ -1,0 +1,157 @@
+.Exchange{
+    width: 100%;
+    height: max-content;
+    min-height: 100%;
+    padding: 20px;
+    gap: 30px;
+    display: flex;
+    flex-direction: column;
+    font-family: Lato, sans-serif;
+
+
+    h3{
+        text-transform:capitalize;
+        line-height: 38.64px;
+        font-size: 27.6px;
+        font-weight: 500;
+        color: rgb(52, 58, 64);
+    }
+}
+
+.Exchange .exchangeBoxHolder{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.Exchange .exchangeBoxHolder section{
+    width: 22.8%;
+    padding: 20px;
+    /* border-radius: 5px; */
+    display: flex;
+    align-items: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: #f8f9fa;
+        gap: 20px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+
+.Exchange .exchangeBoxHolder section .iconHolder{
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #6861ec;
+}
+
+.Exchange .exchangeBoxHolder section .boxInfo{
+    display: flex;
+    flex-direction: column;
+    font-family: Lato, sans-serif;
+
+    span{
+        line-height: 23.24px;
+        font-size: 16.6px;
+        font-weight: 600;
+        color: rgb(108, 117, 125);
+    }
+
+    h3{
+    line-height: 26.04px;
+    font-size: 18.6px;
+    font-weight: 600;
+    color: rgb(52, 58, 64);
+    }
+}
+
+.Exchange .formHold{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.Exchange .formHold form{
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-family: Lato, sans-serif;
+
+    h3{
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 21px;
+        color: rgb(52, 58, 64);
+    }
+}
+
+.Exchange .formHold form section{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.Exchange .formHold form button{
+    width: 100%;
+    height: 40px;
+    padding: 20px;
+    color: white;
+    outline: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: #31ce36; 
+    transition: background 0.3s all ease;
+}
+
+.Exchange .formHold form button:hover{
+    background-color: #25e42b;
+    cursor: pointer;
+}
+
+.Exchange .formHold form section input{
+    width: 100%;
+    height: 40px;
+    padding: 20px;
+    outline: none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border: 1px solid black;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 21px;
+    color: rgb(52, 58, 64);
+}
+.Exchange .formHold form section select{
+    width: 100%;
+    height: 40px;
+    padding: 20px;
+    outline: none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border: 1px solid black;
+}
+
+@media (min-width: 320px) and (max-width: 768px) {
+    .Exchange .exchangeBoxHolder section{
+        width: 100%;
+    }
+    .Exchange .formHold{
+        flex-direction: column;
+    }
+    
+        .Exchange .formHold form{
+            width: 100%;
+        }
+}

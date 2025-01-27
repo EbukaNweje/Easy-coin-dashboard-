@@ -1,0 +1,90 @@
+.DashboardIF{
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    /* max-height: 100%; */
+    overflow-y: scroll;
+    -ms-overflow-style: none;   
+    scrollbar-width: none; 
+    padding: 20px;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.DashboardIF .dashboardIFHead{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-family: Lato, sans-serif;
+
+    h3{
+        font-size:  21.6px;
+        font-weight: 500;
+        color: rgb(52, 58, 64);
+        line-height: 30.24px;
+    }
+
+    span{
+        line-height: 20.44px;
+        font-size: 14.6px;
+        font-weight: 500;
+        color: rgba(169, 175, 187, 0.82);
+    }
+}
+
+.DashboardIF .dashboardIFBoxHolder{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.DashboardIF .dashboardIFBoxHolder section{
+    width: 22.8%;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: #f8f9fa;
+        gap: 20px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+
+.DashboardIF .dashboardIFBoxHolder section .iconHolder{
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #6861ec;
+}
+
+.DashboardIF .dashboardIFBoxHolder section .boxInfo{
+    display: flex;
+    flex-direction: column;
+    font-family: Lato, sans-serif;
+
+    span{
+        line-height: 23.24px;
+        font-size: 16.6px;
+        font-weight: 600;
+        color: rgb(108, 117, 125);
+    }
+
+    h3{
+    line-height: 26.04px;
+    font-size: 18.6px;
+    font-weight: 600;
+    color: rgb(52, 58, 64);
+    }
+}
+
+@media (min-width: 320px) and (max-width: 768px) {
+    .DashboardIF{
+        width: 100vw;
+    }
+
+    .DashboardIF .dashboardIFBoxHolder section{
+        width: 100%;
+    }
+}

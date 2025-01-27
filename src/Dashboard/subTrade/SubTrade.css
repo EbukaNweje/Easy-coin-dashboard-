@@ -1,0 +1,217 @@
+.SubTrade{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.SubTrade h3{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size:  27.6px;
+    font-family: Lato, sans-serif;
+    font-weight: 500;
+    line-height: 38.64px;
+    color: var(--text-color);
+}
+
+.SubTrade .subTradeBox{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+    padding: 20px;
+    font-family: Lato, sans-serif;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: var(--container-bg);
+    color: var(--text-color);
+    box-shadow: var( --container-box-shadow);
+    /* box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px; */
+    span{
+        line-height: 25.48px;
+        font-size: 16px;
+        font-weight: 400;
+    }
+}
+
+.SubTrade .subTradeBox h3{
+    margin-bottom: 30px;
+    font-size: 21.6px;
+    font-weight: 500;
+    line-height:  30.24px;
+    color: var(--text-color);
+}
+
+.SubTrade .subTradeBox button, .subModal form button {
+    width: 150px;
+    margin-top: 30px;
+    padding: 10px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border: none;
+    outline: none;
+    font-family: Lato,sans-serif;
+    font-size: 14px;
+    line-height: 21px;
+    font-weight: 400;
+    background-color:  #1572e8;
+    transition:  background all 0.3s ease;
+}
+
+.SubTrade .subTradeBox button, .subModal form button :hover{
+    cursor: pointer;
+    background-color: #2480f9f7;
+}
+
+.SubTrade .mtaList{
+    width: 100%;
+    height: 250px;
+    margin-top: 60px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: var(--container-bg);
+    color: var(--text-color);
+    box-shadow: var( --container-box-shadow);
+}
+
+.SubTrade .tradingAcct{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 60px;
+
+
+    h3{
+        font-size: 18.6px;
+        font-family: Lato, sans-serif;
+        line-height: 26.04px;
+        color: rgba(169, 175, 187, 0.82);
+        font-weight: 500;
+    }
+}
+
+.subModal{
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    max-height: 100%;
+    overflow-y: scroll;
+    background-color: #7c7c7d5e;
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+    z-index: 9999;
+    /* position: absolute; */
+    /* top: 0%;
+    left: 0%; */
+}
+
+.subModal form{
+    width: 40%;
+    height: max-content;
+    display: flex;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    flex-direction: column;
+    background-color: var(--container-bg);
+    color: var(--text-color);
+    box-shadow: var( --container-box-shadow);
+}
+
+.subModal form .head{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    border-bottom: 1px solid #e9ecef;
+    font-family: Lato, sans-serif;
+
+    h3{
+        line-height: 24.9px;
+        font-size: 16.6px;
+        font-weight: 500;
+        color: var(--text-color);
+    }
+}
+
+.subModal form .inputDiv{
+    width: 100%;
+    padding: 20px;
+    padding-bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.subModal form .inputDiv section{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    label{
+        font-size: 14.6px;
+    }
+}
+
+.subModal form .inputDiv section input{
+    width: 100%;
+    height: 40px;
+    padding: 20px;
+    outline: none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border: var(--border);
+    background-color: var(--container-bg);
+    color: var(--text-color);
+    box-shadow: var( --container-box-shadow);
+}
+.subModal form .inputDiv section select{
+    width: 100%;
+    height: 40px;
+    padding: 20px;
+    outline: none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border: var(--border);
+    background-color: var(--container-bg);}
+
+.below{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+@media (min-width: 320px) and (max-width: 768px) {
+    .SubTrade .subTradeBox{
+        width: 100%;
+    } 
+    .subModal form{
+        width: 100%;
+    }
+    .subModal{
+        padding: 20px;
+        height: 100vh;
+    }
+}

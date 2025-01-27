@@ -1,0 +1,149 @@
+.Sidebar{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.Sidebar .sideBarHead{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgb(216, 213, 213);
+
+    span{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: rgb(119, 119, 119);
+    }
+}
+
+.Sidebar .sideBarHead button{
+    width: 100%;
+    border: none;
+    outline: none;
+    display: flex;
+    background: none;
+    font-size: 18px;
+    font-weight: 400;
+    font-family: Lato sans-serif;
+    line-height: 21px;
+    cursor: pointer;
+    color: rgb(119, 119, 119);
+}
+
+
+.Sidebar .sideBarContent{
+    width: 100%;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    color: rgb(119, 119, 119);
+}
+
+.Sidebar .sideBarContent button{
+    width: 100%;
+    border: none;
+    outline: none;
+    display: flex;
+    align-items: center;
+    background: none;
+    font-size: 18px;
+    font-weight: 400;
+    font-family: Lato sans-serif;
+    line-height: 21px;
+    cursor: pointer;
+}
+
+a{
+    width: 100%;
+    gap: 20px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    padding: 5px;
+    padding-top: 10px;
+    padding-left: 10px;
+    color: rgb(119, 119, 119);
+    padding-bottom: 10px;
+}
+
+a:hover{
+    background-color: var(--sideBtn-hover-bg);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;   
+}
+
+.activeLink{
+    background-color: var(--sideBtn-bg);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    color: black;
+}
+
+.dropA{
+    width: 100%;
+    gap: 20px;
+    display: flex;
+    align-items: center;
+    color: rgb(119, 119, 119);
+    justify-content: space-between;
+    text-decoration: none;
+    padding: 5px;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.Sidebar .sideBarContent .dropDown{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-size: 18px;
+    font-weight: 400;
+    font-family: Lato sans-serif;
+    line-height: 21px;
+    cursor: pointer;
+    color: rgb(119, 119, 119);
+    gap: 20px;
+
+    span{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        
+
+        p{
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+    }
+}
+
+.dropDown ul{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 10px;
+
+    li{
+        align-self: flex-start;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 21px;
+        font-family: Lato sans-serif;
+    }
+}
+
