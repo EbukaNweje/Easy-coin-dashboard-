@@ -49,7 +49,7 @@ const AhmDashHeader = () => {
           <IoMdPerson size={25} color="white" cursor={"pointer"} onClick={() => setShowProfile(!showProfile)}/>
           {
             showProfile ?   <div className="profile">
-            <IoMdArrowDropup  size={35} />
+            <IoMdArrowDropup  size={35} color="white" />
             <div className="profileInfo">
               <section>
                 <span>Brewer </span>

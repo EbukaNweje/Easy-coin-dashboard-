@@ -123,6 +123,7 @@
     flex-direction: column;
     align-items: end;
     gap: 0%;
+    z-index: 9999;
 }
 
 .profile .profileInfo{
