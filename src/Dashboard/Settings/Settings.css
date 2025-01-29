@@ -118,7 +118,7 @@ input:disabled {
     gap: 20px;
  }
  
- .passwordForm section{
+ .passwordForm section, .bankSettings section, .currencySettings section{
     width: 45%;
     display: flex;
     flex-direction: column;
@@ -132,7 +132,7 @@ input:disabled {
  }
 
  
- .passwordForm section input {
+ .passwordForm section input, .bankSettings section input, .currencySettings section input {
     width: 100%;
     height: 50px;
     padding: 20px;
@@ -146,7 +146,7 @@ input:disabled {
     background: white; 
 }
 
- .passwordForm .btnHolder{
+ .passwordForm .btnHolder, .widthdrawalSettings .btnHolder{
     width: 100%;
     
     button{
@@ -259,11 +259,30 @@ input:disabled {
     }
   }
   
-  
-  .settingsForm input, .settingsForm select {
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+
+  .widthdrawalSettings{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
   }
+
+  .widthdrawalSettings .bankSettings, .widthdrawalSettings .currencySettings{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .widthdrawalSettings .bankSettings .bsHead, .widthdrawalSettings .currencySettings .bsHead{
+    width: 100%;
+    line-height: 36px;
+    font-size: 24px;
+    font-weight: 400;
+    color: rgba(169, 175, 187, 0.82);
+    font-family: 'Lato', sans-serif;
+  }
+
+
+
   

@@ -46,14 +46,52 @@ const Settings = () => {
 
       case "withdrawal":
         return (
-          <div className="settingsForm">
-            <label>Bank Name</label>
-            <input type="text" placeholder="Enter your bank name" />
-            <label>Account Number</label>
-            <input type="text" placeholder="Enter your account number" />
-            <label>Withdrawal PIN</label>
-            <input type="password" placeholder="Set a withdrawal PIN" />
-          </div>
+          <form className="widthdrawalSettings">
+            <div className="bankSettings">
+              <div className="bsHead"> <h1>Bank Account</h1>
+              </div>
+              <section>
+              <label>Bank Name</label>
+              <input type="text" placeholder="Enter your bank name" />
+              </section>
+              <section>
+              <label>Account Name</label>
+              <input type="text" placeholder="Enter your Account Name" />
+              </section>
+              <section>
+              <label>Account Number</label>
+              <input type="text" placeholder="Enter your Account Number" />
+              </section>
+              <section>
+              <label>Swift Code</label>
+              <input type="text" placeholder="Enter Swift Code" />
+              </section>
+            </div>
+            <div className="currencySettings">
+              <div className="bsHead">
+              <h1>Cryptocurrency</h1>
+              </div>
+              <section>
+                <label>Bitcoin</label>
+                <input type="text" placeholder="Enter your Bitcoin adress"/>
+                <label>Enter your Bitcoin Address that will be used to withdraw your funds</label>
+              </section>
+              <section>
+                <label>Ethereum</label>
+                <input type="text"  placeholder="Enter your Ethereum adress"/>
+                <label>Enter your Ethereum Address that will be used to withdraw your funds</label>
+              </section>
+              <section>
+                <label>Litecoin</label>
+                <input type="text"  placeholder="Enter your Litecoin adress" />
+                <label>Enter your Litecoin Address that will be used to withdraw your funds
+                </label>
+              </section>
+            </div>
+            <div className="btnHolder">
+              <button type="submit">Save</button>
+            </div>
+          </form>
         );
 
       case "password":
@@ -177,16 +215,16 @@ const Settings = () => {
     <div className="Settings">
       <div className="settingsWrap">
         <div className="settingsHead">
-          <button className={activeTab === "personal" ? "active" : ""} onClick={() => setActiveTab("personal")}>
+          <button style={{borderRight: 'none', borderTopLeftRadius: '5px', borderBottomLeftRadius: '5px'}} className={activeTab === "personal" ? "active" : ""} onClick={() => setActiveTab("personal")}>
             Personal
           </button>
-          <button className={activeTab === "withdrawal" ? "active" : ""} onClick={() => setActiveTab("withdrawal")}>
+          <button style={{borderRight: 'none'}} className={activeTab === "withdrawal" ? "active" : ""} onClick={() => setActiveTab("withdrawal")}>
             Withdrawal
           </button>
-          <button className={activeTab === "password" ? "active" : ""} onClick={() => setActiveTab("password")}>
+          <button style={{borderRight: 'none'}} className={activeTab === "password" ? "active" : ""} onClick={() => setActiveTab("password")}>
             Password/Security
           </button>
-          <button className={activeTab === "others" ? "active" : ""} onClick={() => setActiveTab("others")}>
+          <button style={{borderTopRightRadius: '5px', borderBottomRightRadius: '5px'}} className={activeTab === "others" ? "active" : ""} onClick={() => setActiveTab("others")}>
             Other Settings
           </button>
         </div>
