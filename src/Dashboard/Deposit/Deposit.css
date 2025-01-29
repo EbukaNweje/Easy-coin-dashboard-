@@ -19,9 +19,9 @@
     /* margin-top: 30px; */
     border-radius: 10px;
     background-color: var(--container-bg);
+    box-shadow: var( --container-box-shadow);
     padding: 30px;
     border-radius: 20px;
-    box-shadow: var( --container-box-shadow);
 }
 
 .depositWrap section{

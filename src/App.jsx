@@ -14,22 +14,25 @@ import Profit from "./Dashboard/History/Profit";
 import Help from "./Dashboard/Help/Help";
 import Settings from "./Dashboard/Settings/Settings";
 import Deposit from "./Dashboard/Deposit/Deposit";
+import Plan from "./Dashboard/invest/Plan";
+import Sidebar from "./Dashboard/Sidebar/Sidebar";
 
 const AppRouter = () => {
-  const [scrollToInvestment, setScrollToInvestment] = useState(() => () => {});
+  const [showModal, setShowModal] = useState(false); 
 
   const router = createHashRouter([
     { path: "/", element: <Login /> },
     { path: "/register", element: <Signup /> },
     {
       path: "dashboard",
-      element: <Dashboard />,
+      element: <Dashboard showModal={showModal} setShowModal={setShowModal} />,
       children: [
         { path: "", element: <DashboardIF /> },
         { path: "account-settings", element: <Settings /> },
         { path: "asset-balance", element: <Exchange /> },
         { path: "subtrade", element: <SubTrade /> },
         { path: "deposits", element: <Deposit /> },
+        { path: "buy-plan", element: <Plan showModal={showModal} setShowModal={setShowModal} /> },
         { path: "tradinghistory", element: <Profit /> },
         { path: "support", element: <Help /> },
         { path: "referuser", element: <Referuser /> },

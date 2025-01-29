@@ -6,7 +6,7 @@ import { Outlet } from 'react-router-dom'
 import SidebarSub from './Sidebar/SidebarSub';
 import AdmSide from './Admside/AdmSide';
 
-const Dashboard = () => {
+const Dashboard = ({showModal,setShowModal}) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const date = new Date();
   const formatted = date.getFullYear();
@@ -22,12 +22,12 @@ const Dashboard = () => {
       </div>
       <article>
         <aside>
-          <Sidebar />
+          <Sidebar showModal={showModal} setShowModal={setShowModal} />
         </aside>
         <div
           className={`sidebarSub ${isSidebarOpen ? "open" : ""}`}
         >
-          {isSidebarOpen ? <SidebarSub toggleSidebar={toggleSidebar} />: null}
+          {isSidebarOpen ? <SidebarSub  toggleSidebar={toggleSidebar} />: null}
         </div>
         <main className={`${isSidebarOpen ? "main-expanded" : ""}`}>
           <header>

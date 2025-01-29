@@ -8,13 +8,14 @@
     flex-direction: column;
     height: 100vh;
     position: relative;
-    overflow-y: scroll;
 }
 
 .Dashboard article{
     width: 100%;
     height: 100%;
-    display: flex;
+    display: flex;   
+   /* overflow-y: scroll; */
+
 }
 
 .Dashboard article aside{
@@ -32,6 +33,7 @@
     height: 100%;
     min-height: 100%;
     max-height: 100%;
+    overflow-y: scroll;
     background-color: #f8f9fa;
 
     header{
@@ -112,6 +114,29 @@
     position: relative;
     width: 50%;
 }
+
+
+.Dashboard .AhmDashHeader nav ul .mode button {
+  width: 130px;
+  padding: 10px;
+  border: none;
+  outline: none;
+  height: 50px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  background-color: var(--mode-bg);
+  color: var(--mode-text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.Dashboard .AhmDashHeader nav ul .mode button:hover {
+  opacity: 0.9;
+}
+
 
 .profile{
     position: absolute;
@@ -212,12 +237,16 @@
     --button-active-top-side-border: 1px solid #dee2e6;
     --border-hover: 1px solid #dee2e6;
     --b1: solid black;
+    --mode-bg: lightgrey;
+    --mode-text: white;
     --btn-bs: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     --button-active-bottom-border: 1px solid #dee2e6;
   }
   
   
   [data-theme="dark"] {
+    --mode-bg: black;
+    --mode-text: white;
     --bg-color: #1a2035;
     --header-bg: #1a2035;
     --text-color: #fff;
@@ -277,65 +306,6 @@
     color: rgb(52, 58, 64);
 }
 
- /* @media (max-width: 768px) {
-  .Dashboard article {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    position: relative;
-    transition: all 0.3s ease;
-  }
-  
-  .Dashboard article .sidebarSub {
-    width: 0%;
-    overflow: hidden;
-    transition: width 0.3s ease;
-  }
-  
-  .Dashboard article .sidebarSub.open {
-    width: 60%;
-  }
-  
-  .Dashboard article main {
-    flex: 1; 
-    width: 40%;
-    transition: margin-left 0.3s ease;
-  }
-  
-   .Dashboard article.main-expanded {
-    margin-left: 60%; 
-  } 
-  
-  .Dashboard article main header {
-    display: flex;
-    width: 100%;
-  }
-  
-  .Dashboard article main {
-    overflow: hidden;
-  }
-  
-
-  .Dashboard .deskTopHead{
-    display: none;
-  }
-
-  .Dashboard article aside{
-    display: none;
-  }
-  
-  .Dashboard article main header{
-    display: flex;
-    width: 100%;
-    background-color: green;
-}
-
-  .copyRight {
-    padding: 10px;
-    font-size: 12px;
-  }
-}  */
-
 .Dashboard article {
     display: flex;
     width: 100%;
@@ -344,12 +314,6 @@
     overflow: hidden;
   }
   
-  /* .Dashboard article aside {
-    width: 20%; 
-    height: 100%;
-    overflow-y: auto;
-    transition: all 0.3s ease;
-  } */
   
   .Dashboard article .sidebarSub {
     width: 0; 
@@ -363,14 +327,6 @@
     width: 40%; 
   }
   
-  /* .Dashboard article main {
-   
-  } */
-  
-  /* .Dashboard article main.main-expanded {
-    left: 40%; 
-    width: calc(100vw - 40%); 
-  } */
   
   @media (min-width: 320px) and (max-width: 768px) {
     .deskTopHead{

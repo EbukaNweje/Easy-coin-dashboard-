@@ -39,7 +39,7 @@ const AhmDashHeader = () => {
         </div>
         <ul>
           <div className="mode">
-            <button onClick={toggleDarkMode}>
+            <button onClick={toggleDarkMode} >
               {isDarkMode ? "Light Mode" : "Dark Mode"}
             </button>
           </div>
@@ -65,7 +65,7 @@ const AhmDashHeader = () => {
                 <button onClick={()=> handleNav()}>Account settings</button>
               </section>
               <section>
-                <span>Deposit </span>
+                <span  onClick={()=>nav('deposits')}>Deposit </span>
                 <span>widthdraw</span>
                 <span>Buy plan</span>
               </section>
