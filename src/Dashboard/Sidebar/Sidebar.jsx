@@ -6,11 +6,18 @@ import { TbGridDots } from "react-icons/tb";
 import { LuRecycle } from "react-icons/lu";
 import { IoMdHelpBuoy } from "react-icons/io";
 import { MdOutlineArrowDropDown } from "react-icons/md";
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const Sidebar = () => {
   const [showButton, setShowButton] = useState(false);
   const [dropDown, setDropDown] = useState(false);
+
+  const nav = useNavigate();
+
+  const handleNav = () => {
+    nav('/dashboard/account-settings'); 
+    setShowButton(!showButton);
+  };
 
   return (
     <div className='Sidebar'>
@@ -19,7 +26,7 @@ const Sidebar = () => {
           Brewer c.w 
           <MdOutlineArrowDropDown cursor={'pointer'} onClick={() => setShowButton(!showButton)} />
         </span>
-        {showButton ? <button>Account settings</button> : null}
+        {showButton ? <button onClick={handleNav}>Account settings</button> : null}
       </div>
       <div className="sideBarContent">
         <button>

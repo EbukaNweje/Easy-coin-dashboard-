@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Dashboard.css";
 import { IoMenuOutline } from "react-icons/io5";
 import { IoMdPerson, IoMdArrowDropup } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
 const AhmDashHeader = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -14,6 +15,13 @@ const AhmDashHeader = () => {
     } else {
       document.documentElement.setAttribute("data-theme", "light");
     }
+  };
+
+  const nav = useNavigate()
+
+  const handleNav = () => {
+    nav('/dashboard/account-settings'); 
+    setShowProfile(!showProfile);
   };
 
   return (
@@ -48,13 +56,13 @@ const AhmDashHeader = () => {
           </div>
           <IoMdPerson size={25} color="white" cursor={"pointer"} onClick={() => setShowProfile(!showProfile)}/>
           {
-            showProfile ?   <div className="profile">
+            showProfile ?   <div className="profile" >
             <IoMdArrowDropup  size={35} color="white" />
             <div className="profileInfo">
               <section>
                 <span>Brewer </span>
                 <span style={{color: ' rgb(108, 117, 125)', fontSize: '12px', lineHeight: '21.84px'}}>brewercw964@gmail.com</span>
-                <button>Account settings</button>
+                <button onClick={()=> handleNav()}>Account settings</button>
               </section>
               <section>
                 <span>Deposit </span>
