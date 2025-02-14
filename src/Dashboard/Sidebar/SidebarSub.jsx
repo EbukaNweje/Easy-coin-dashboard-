@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Sidebar.css';
 import { FaHome, FaBriefcase, FaCoins } from "react-icons/fa";
 import { GiNetworkBars } from "react-icons/gi";
@@ -7,16 +7,34 @@ import { LuRecycle } from "react-icons/lu";
 import { IoMdHelpBuoy } from "react-icons/io";
 import { MdOutlineArrowDropDown } from "react-icons/md";
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 const SidebarSub = ({toggleSidebar}) => {
   const [showButton, setShowButton] = useState(false);
   const [dropDown, setDropDown] = useState(false);
+  const [userData, setUserData] = useState(null);
+  const userId = useSelector((state) => state.toptiertrade.user); 
+
+  const getOne = async () => {    
+    try {
+      const response = await axios.get(`https://toptiertrade-back-end-new.vercel.app/api/userdata/${userId}`);
+      setUserData(response?.data?.data);
+      
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+    }
+  };
+
+  useEffect(() => {
+    if (userId) getOne();
+  }, [userId]);
 
   return (
     <div className='Sidebar'>
       <div className="sideBarHead">
         <span>
-          Brewer c.w 
+        {userData?.fullName || 'User'}
           <MdOutlineArrowDropDown cursor={'pointer'} onClick={() => setShowButton(!showButton)} />
         </span>
         {showButton ? <button>Account settings</button> : null}

@@ -1,37 +1,62 @@
-import React, { useState, useRef } from 'react';
-import './Transaction.css';
+import React, { useState, useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
+import axios from "axios";
+import "./Transaction.css";
+import toast from "react-hot-toast";
 
 const Transaction = () => {
-  const [currentTab, setCurrentTab] = useState('Deposits');
+  const userId = useSelector((state) => state.toptiertrade.user); 
+  console.log(userId);
+  
+  const [currentTab, setCurrentTab] = useState("Deposits");
+  const [transactions, setTransactions] = useState({
+    Deposits: [],
+    Withdrawals: [],
+    Others: [],
+  });
   const [currentPage, setCurrentPage] = useState(1);
   const [entriesPerPage, setEntriesPerPage] = useState(5);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
+  const [loading, setLoading] = useState(false);
   const tableRef = useRef(null);
 
-  const data = {
-    Deposits: [
-      { amount: 100, paymentMode: 'Bank Transfer', status: 'Completed', dateCreated: '2024-01-01' },
-      { amount: 200, paymentMode: 'Card', status: 'Pending', dateCreated: '2024-01-02' },
-    ],
-    Withdrawals: [
-      { amountRequested: 150, charges: 5, receivingMode: 'Bank Transfer', status: 'Completed', dateCreated: '2024-01-01' },
-      { amountRequested: 250, charges: 10, receivingMode: 'Card', status: 'Pending', dateCreated: '2024-01-02' },
-    ],
-    Others: [
-      { amount: 50, plan: 'Investment', type: 'Auto-deposit', dateCreated: '2024-01-01' },
-      { amount: 75, plan: 'Savings', type: 'Manual deposit', dateCreated: '2024-01-02' },
-    ],
-  };
+  useEffect(() => {
+    const fetchTransactions = async () => {
+      if (!userId) return;
 
-  const tableData = data[currentTab]
-    .filter((item) =>
+      setLoading(true);
+      try {
+        const response = await axios.get(
+          `https://toptiertrade-back-end-new.vercel.app/api/getalltransactions/${userId}`
+        );
+        console.log(response);
+        toast.success(response?.data.message || 'success fetching your transaction history')
+        const data = {
+          Deposits: transactions.deposits || [],
+          Withdrawals: transactions.withdrawals || [],
+          Others: [...(transactions.interests || []), ...(transactions.investments || [])],
+        };
+
+        setTransactions(data);
+      } catch (error) {
+        console.error("Error fetching transactions:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTransactions();
+  }, [userId]);
+
+  const tableData = transactions[currentTab]
+    ?.filter((item) =>
       Object.values(item).some((value) =>
         String(value).toLowerCase().includes(searchQuery.toLowerCase())
       )
     )
     .slice((currentPage - 1) * entriesPerPage, currentPage * entriesPerPage);
 
-  const totalEntries = data[currentTab].filter((item) =>
+  const totalEntries = transactions[currentTab]?.filter((item) =>
     Object.values(item).some((value) =>
       String(value).toLowerCase().includes(searchQuery.toLowerCase())
     )
@@ -39,30 +64,20 @@ const Transaction = () => {
 
   const totalPages = Math.ceil(totalEntries / entriesPerPage);
 
-  const handleTabChange = (tab) => {
-    setCurrentTab(tab);
-    setCurrentPage(1);
-    setSearchQuery('');
-  };
-
-  const handleScroll = (direction) => {
-    if (direction === 'down' && tableRef.current) {
-      tableRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
-    } else if (direction === 'up' && tableRef.current) {
-      tableRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
-
   return (
     <div className="Transaction">
       <h3>Transactions on your account</h3>
       <div className="tranWrap">
         <div className="tranHead">
-          {['Deposits', 'Withdrawals', 'Others'].map((tab) => (
+          {["Deposits", "Withdrawals", "Others"].map((tab) => (
             <button
               key={tab}
-              onClick={() => handleTabChange(tab)}
-              className={currentTab === tab ? 'active' : ''}
+              onClick={() => {
+                setCurrentTab(tab);
+                setCurrentPage(1);
+                setSearchQuery("");
+              }}
+              className={currentTab === tab ? "active" : ""}
             >
               {tab}
             </button>
@@ -72,7 +87,10 @@ const Transaction = () => {
         <div className="tableControls">
           <label>
             Show
-            <select value={entriesPerPage} onChange={(e) => setEntriesPerPage(Number(e.target.value))}>
+            <select
+              value={entriesPerPage}
+              onChange={(e) => setEntriesPerPage(Number(e.target.value))}
+            >
               <option value={5}>5</option>
               <option value={10}>10</option>
               <option value={20}>20</option>
@@ -90,164 +108,100 @@ const Transaction = () => {
           </label>
         </div>
 
-        <table ref={tableRef}>
-          <thead>
-            <tr>
-              {currentTab === 'Deposits' && (
-                <>
-                  <th>
-                    Amount
-                    <div className="scroll-icons">
-                      <span onClick={() => handleScroll('up')}>&uarr;</span>
-                      <span onClick={() => handleScroll('down')}>&darr;</span>
-                    </div>
-                  </th>
-                  <th>Payment Mode
-                  <div className="scroll-icons">
-                      <span onClick={() => handleScroll('up')}>&uarr;</span>
-                      <span onClick={() => handleScroll('down')}>&darr;</span>
-                    </div>
-                  </th>
-                  <th>Status
-                  <div className="scroll-icons">
-                      <span onClick={() => handleScroll('up')}>&uarr;</span>
-                      <span onClick={() => handleScroll('down')}>&darr;</span>
-                    </div>
-                  </th>
-                  <th>Date Created
-                  <div className="scroll-icons">
-                      <span onClick={() => handleScroll('up')}>&uarr;</span>
-                      <span onClick={() => handleScroll('down')}>&darr;</span>
-                    </div>
-                  </th>
-                </>
-              )}
-              {currentTab === 'Withdrawals' && (
-                <>
-                  <th>
-                    Amount Requested
-                    <div className="scroll-icons">
-                      <span onClick={() => handleScroll('up')}>&uarr;</span>
-                      <span onClick={() => handleScroll('down')}>&darr;</span>
-                    </div>
-                  </th>
-                  <th>Charges
-                  <div className="scroll-icons">
-                      <span onClick={() => handleScroll('up')}>&uarr;</span>
-                      <span onClick={() => handleScroll('down')}>&darr;</span>
-                    </div>
-                  </th>
-                  <th>Receiving Mode
-                  <div className="scroll-icons">
-                      <span onClick={() => handleScroll('up')}>&uarr;</span>
-                      <span onClick={() => handleScroll('down')}>&darr;</span>
-                    </div>
-                  </th>
-                  <th>Status
-                  <div className="scroll-icons">
-                      <span onClick={() => handleScroll('up')}>&uarr;</span>
-                      <span onClick={() => handleScroll('down')}>&darr;</span>
-                    </div>
-                  </th>
-                  <th>Date Created
-                  <div className="scroll-icons">
-                      <span onClick={() => handleScroll('up')}>&uarr;</span>
-                      <span onClick={() => handleScroll('down')}>&darr;</span>
-                    </div>
-                  </th>
-                </>
-              )}
-              {currentTab === 'Others' && (
-                <>
-                  <th>
-                    Amount
-                    <div className="scroll-icons">
-                      <span onClick={() => handleScroll('up')}>&uarr;</span>
-                      <span onClick={() => handleScroll('down')}>&darr;</span>
-                    </div>
-                  </th>
-                  <th>Plan/Narration
-                  <div className="scroll-icons">
-                      <span onClick={() => handleScroll('up')}>&uarr;</span>
-                      <span onClick={() => handleScroll('down')}>&darr;</span>
-                    </div>
-                  </th>
-                  <th>Type
-                  <div className="scroll-icons">
-                      <span onClick={() => handleScroll('up')}>&uarr;</span>
-                      <span onClick={() => handleScroll('down')}>&darr;</span>
-                    </div>
-                  </th>
-                  <th>Date Created
-                  <div className="scroll-icons">
-                      <span onClick={() => handleScroll('up')}>&uarr;</span>
-                      <span onClick={() => handleScroll('down')}>&darr;</span>
-                    </div>
-                  </th>
-                </>
-              )}
-            </tr>
-          </thead>
-          <tbody>
-            {tableData.length > 0 ? (
-              tableData.map((item, index) => (
-                <tr key={index}>
-                  {currentTab === 'Deposits' && (
-                    <>
-                      <td>{item.amount}</td>
-                      <td>{item.paymentMode}</td>
-                      <td>{item.status}</td>
-                      <td>{item.dateCreated}</td>
-                    </>
-                  )}
-                  {currentTab === 'Withdrawals' && (
-                    <>
-                      <td>{item.amountRequested}</td>
-                      <td>{item.charges}</td>
-                      <td>{item.receivingMode}</td>
-                      <td>{item.status}</td>
-                      <td>{item.dateCreated}</td>
-                    </>
-                  )}
-                  {currentTab === 'Others' && (
-                    <>
-                      <td>{item.amount}</td>
-                      <td>{item.plan}</td>
-                      <td>{item.type}</td>
-                      <td>{item.dateCreated}</td>
-                    </>
-                  )}
-                </tr>
-              ))
-            ) : (
+        {loading ? (
+          <p>Loading transactions...</p>
+        ) : (
+          <table ref={tableRef}>
+            <thead>
               <tr>
-                <td colSpan="5" style={{ textAlign: 'center' }}>
-                  No entries found.
-                </td>
+                {currentTab === "Deposits" && (
+                  <>
+                    <th>Amount</th>
+                    <th>Payment Mode</th>
+                    <th>Status</th>
+                    <th>Date Created</th>
+                  </>
+                )}
+                {currentTab === "Withdrawals" && (
+                  <>
+                    <th>Amount Requested</th>
+                    <th>Charges</th>
+                    <th>Receiving Mode</th>
+                    <th>Status</th>
+                    <th>Date Created</th>
+                  </>
+                )}
+                {currentTab === "Others" && (
+                  <>
+                    <th>Amount</th>
+                    <th>Plan</th>
+                    <th>Type</th>
+                    <th>Date Created</th>
+                  </>
+                )}
               </tr>
-            )}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {tableData.length > 0 ? (
+                tableData.map((item, index) => (
+                  <tr key={index}>
+                    {currentTab === "Deposits" && (
+                      <>
+                        <td>{item.amount}</td>
+                        <td>{item.paymentMode}</td>
+                        <td>{item.status}</td>
+                        <td>{item.dateCreated}</td>
+                      </>
+                    )}
+                    {currentTab === "Withdrawals" && (
+                      <>
+                        <td>{item.amountRequested}</td>
+                        <td>{item.charges}</td>
+                        <td>{item.receivingMode}</td>
+                        <td>{item.status}</td>
+                        <td>{item.dateCreated}</td>
+                      </>
+                    )}
+                    {currentTab === "Others" && (
+                      <>
+                        <td>{item.amount}</td>
+                        <td>{item.plan}</td>
+                        <td>{item.type}</td>
+                        <td>{item.dateCreated}</td>
+                      </>
+                    )}
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="5" style={{ textAlign: "center" }}>
+                    No entries found.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        )}
+
         <div className="pagination">
-        <span>
+          <span>
             Showing {currentPage} to {totalPages} of {entriesPerPage} entries
           </span>
-
-            <div className="pagButtons">
+          <div className="pagButtons">
             <button
-            disabled={currentPage === 1}
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-          >
-            Previous
-          </button>
-          
-          <button
-            disabled={currentPage === totalPages}
-            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-          >
-            Next
-          </button>
-            </div>
+              disabled={currentPage === 1}
+              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            >
+              Previous
+            </button>
+
+            <button
+              disabled={currentPage === totalPages}
+              onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+            >
+              Next
+            </button>
+          </div>
         </div>
       </div>
     </div>

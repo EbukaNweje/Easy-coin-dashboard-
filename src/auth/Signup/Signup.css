@@ -48,7 +48,7 @@
 
 .Signup form section label{
     color: rgb(41, 128, 185);
-    font-size: 14px;
+    font-size: 20px;
     line-height: 21px;
     font-weight: 600;
 }
@@ -69,7 +69,7 @@
     height: 100%;
     border: none;
     outline: none;
-    font-size: 14px;
+    font-size: 18px;
     line-height: 20.5px;
     font-family: Nunito sans-serif;
     font-weight: 400;
@@ -80,7 +80,7 @@
     height: 100%;
     border: none;
     outline: none;
-    font-size: 15px;
+    font-size: 18px;
     line-height: 22.5px;
     font-weight: 400;
     color:  #12263f;
@@ -96,7 +96,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 16px;
+    font-size: 20px;
     line-height: 24px;
     font-weight: 400;
     outline: none;
@@ -119,7 +119,7 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
-    Font-size: 13.5px;
+    Font-size: 17.5px;
     Font-weight: 400;
     Line-height: 21.6px;
     color: #3c4858;
@@ -139,7 +139,7 @@
     display: flex;
     justify-content:space-around;
     align-items: center;
-    Font-size: 14.5px;
+    Font-size: 17.5px;
     Font-weight: 400;
     Line-height: 21.6px;
     color: #3c4858;

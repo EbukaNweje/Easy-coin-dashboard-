@@ -1,58 +1,57 @@
-import React, { useState, useRef } from 'react';
-import './Transaction.css';
-
+import React, { useState, useEffect, useRef } from "react";
+import { useSelector } from "react-redux"; 
+import "./Transaction.css";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const Profit = () => {
+  const id = useSelector((state) => state.toptiertrade.user); 
   const [currentPage, setCurrentPage] = useState(1);
   const [entriesPerPage, setEntriesPerPage] = useState(5);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
   const tableRef = useRef(null);
 
-  const data = [
-    {  plan: 'Investment',  amount: 50, type: 'Auto-deposit', dateCreated: '2024-01-01' },
-    { plan: 'Savings', amount: 75,  type: 'Manual deposit', dateCreated: '2024-01-02' },
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!id) return; 
 
-  const filteredData = data
-    .filter((item) =>
-      Object.values(item).some((value) =>
-        String(value).toLowerCase().includes(searchQuery.toLowerCase())
+      setLoading(true);
+      try {
+        const response = await axios.get(
+          `https://toptiertrade-back-end-new.vercel.app/api/getallinvestmentplan/${id}`
+        );
+        toast.success(response?.data.message)
+        setData(response?.data.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        toast.error('Error fetching data')
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [id]); 
+
+  const filteredData = data.length > 0 
+  ? data.filter((item) =>
+      Object.values(item || {}).some((value) =>
+        String(value || "").toLowerCase().includes(searchQuery.toLowerCase())
       )
-    )
-    .slice((currentPage - 1) * entriesPerPage, currentPage * entriesPerPage);
+    ).slice((currentPage - 1) * entriesPerPage, currentPage * entriesPerPage)
+  : [];
 
-  const totalEntries = data.filter((item) =>
-    Object.values(item).some((value) =>
-      String(value).toLowerCase().includes(searchQuery.toLowerCase())
-    )
-  ).length;
+  const totalEntries = data.length > 0 
+  ? data.filter((item) =>
+      Object.values(item || {}).some((value) =>
+        String(value || "").toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    ).length
+  : 0;
 
   const totalPages = Math.ceil(totalEntries / entriesPerPage);
-
-  const handleScroll = (direction) => {
-    if (direction === 'down' && tableRef.current) {
-      tableRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
-    } else if (direction === 'up' && tableRef.current) {
-      tableRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
-
-  const renderTableHeaders = () => {
-    const headers = Object.keys(data[0] || {});
-    return (
-      <tr>
-        {headers.map((header) => (
-          <th key={header}>
-            {header.charAt(0).toUpperCase() + header.slice(1)}
-            <div className="scroll-icons">
-              <span onClick={() => handleScroll('up')}>&uarr;</span>
-              <span onClick={() => handleScroll('down')}>&darr;</span>
-            </div>
-          </th>
-        ))}
-      </tr>
-    );
-  };
 
   return (
     <div className="Transaction">
@@ -61,7 +60,10 @@ const Profit = () => {
         <div className="tableControls">
           <label>
             Show
-            <select value={entriesPerPage} onChange={(e) => setEntriesPerPage(Number(e.target.value))}>
+            <select
+              value={entriesPerPage}
+              onChange={(e) => setEntriesPerPage(Number(e.target.value))}
+            >
               <option value={5}>5</option>
               <option value={10}>10</option>
               <option value={20}>20</option>
@@ -79,47 +81,56 @@ const Profit = () => {
           </label>
         </div>
 
-        <table ref={tableRef}>
-          <thead>{renderTableHeaders()}</thead>
-          <tbody>
-            {filteredData.length > 0 ? (
-              filteredData.map((item, index) => (
-                <tr key={index}>
-                  {Object.values(item).map((value, idx) => (
-                    <td key={idx}>{value}</td>
+        {loading ? (
+          <p>Loading data...</p>
+        ) : (
+          <table ref={tableRef}>
+            <thead>
+              {data.length > 0 && (
+                <tr>
+                  {Object.keys(data[0]).map((header) => (
+                    <th key={header}>{header.charAt(0).toUpperCase() + header.slice(1)}</th>
                   ))}
                 </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="5" style={{ textAlign: 'center' }}>
-                No data available in table
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+              )}
+            </thead>
+            <tbody>
+              {filteredData.length > 0 ? (
+                filteredData.map((item, index) => (
+                  <tr key={index}>
+                    {Object.values(item).map((value, idx) => (
+                      <td key={idx}>{value}</td>
+                    ))}
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="5" style={{ textAlign: "center" }}>No data available</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        )}
 
         <div className="pagination">
-        <span>
+          <span>
             Showing {currentPage} to {totalPages} of {entriesPerPage} entries
           </span>
-
-            <div className="pagButtons">
+          <div className="pagButtons">
             <button
-            disabled={currentPage === 1}
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-          >
-            Previous
-          </button>
-          
-          <button
-            disabled={currentPage === totalPages}
-            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-          >
-            Next
-          </button>
-            </div>
+              disabled={currentPage === 1}
+              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            >
+              Previous
+            </button>
+
+            <button
+              disabled={currentPage === totalPages}
+              onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+            >
+              Next
+            </button>
+          </div>
         </div>
       </div>
     </div>

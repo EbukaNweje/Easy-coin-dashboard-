@@ -35,7 +35,7 @@ const AhmDashHeader = () => {
       <nav>
         <div className="btnHolder">
           <button onClick={()=>nav('deposits')} style={{ backgroundColor: "#ffad46" }}>Fund your Account</button>
-          <button>Withdraw Funds</button>
+          <button onClick={()=>nav('withdrawals')}>Withdraw Funds</button>
         </div>
         <ul>
           <div className="mode">

@@ -140,3 +140,65 @@
         border-top-right-radius: 5px;
         border-bottom-right-radius: 5px;
 }
+
+/* Investment Table Styling */
+.investmentTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: var(--container-bg);
+    box-shadow: var(--container-box-shadow);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.investmentTable thead {
+    background-color: #1572e8;
+    color: white;
+    text-align: left;
+    font-size: 18px;
+}
+
+.investmentTable th, .investmentTable td {
+    padding: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.investmentTable tbody tr:hover {
+    background-color: rgba(21, 114, 232, 0.1);
+}
+
+.investmentTable tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.investmentTable td {
+    font-size: 16px;
+    color: var(--text-color);
+}
+
+/* Status Badge */
+.investmentTable td:last-child {
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.investmentTable td:last-child[data-status="pending"] {
+    color: #f39c12;
+}
+
+.investmentTable td:last-child[data-status="completed"] {
+    color: #2ecc71;
+}
+
+.investmentTable td:last-child[data-status="failed"] {
+    color: #e74c3c;
+}
+
+@media (max-width: 768px) {
+    .investmentTable th, .investmentTable td {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+

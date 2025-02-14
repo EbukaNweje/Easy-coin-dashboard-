@@ -16,6 +16,9 @@ import Settings from "./Dashboard/Settings/Settings";
 import Deposit from "./Dashboard/Deposit/Deposit";
 import Plan from "./Dashboard/invest/Plan";
 import Sidebar from "./Dashboard/Sidebar/Sidebar";
+import WithFunds from "./Dashboard/Withdrawal/WithFunds";
+import Withdrawal from "./Dashboard/Withdrawal/Withdrawal";
+import { Toaster } from "react-hot-toast";
 
 const AppRouter = () => {
   const [showModal, setShowModal] = useState(false); 
@@ -34,6 +37,8 @@ const AppRouter = () => {
         { path: "deposits", element: <Deposit /> },
         { path: "buy-plan", element: <Plan showModal={showModal} setShowModal={setShowModal} /> },
         { path: "tradinghistory", element: <Profit /> },
+        { path: "withdraw-funds", element: <WithFunds /> },
+        { path: "withdrawals", element: <Withdrawal/> },
         { path: "support", element: <Help /> },
         { path: "referuser", element: <Referuser /> },
         { path: "accounthistory", element: <Transaction /> },
@@ -45,6 +50,7 @@ const AppRouter = () => {
     <>
       <RouterProvider router={router} />
       <ToastContainer />
+      <Toaster/>
     </>
   );
 };
