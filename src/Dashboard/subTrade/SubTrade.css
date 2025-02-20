@@ -205,8 +205,8 @@
 
 @media (min-width: 320px) and (max-width: 768px) {
     .SubTrade .subTradeBox{
-        width: 100%;
-    } 
+        width: 100vw;
+        } 
     .subModal form{
         width: 100%;
     }

@@ -196,6 +196,10 @@
 
   @media (min-width: 320px) and (max-width: 768px) {
 
+    .Transaction{
+      width: 100vw;
+    }
+
     .pagination{
       flex-direction: column;
       align-items: center;

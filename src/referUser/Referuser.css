@@ -97,9 +97,9 @@
 }
 
 @media (min-width: 320px) and (max-width: 768px) {
-    /* .Referuser .referWrap{
-        padding: 50px;
-    } */
+    .Referuser {
+        width: 100vw;
+        }
     
     .copy .copyInput{
         width: 100%;

@@ -7,14 +7,20 @@ import { LuRecycle } from "react-icons/lu";
 import { IoMdHelpBuoy } from "react-icons/io";
 import { MdOutlineArrowDropDown } from "react-icons/md";
 import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { MdLogout } from "react-icons/md";
+import { logout } from '../../Global/Slice';
+
 
 const SidebarSub = ({toggleSidebar}) => {
   const [showButton, setShowButton] = useState(false);
   const [dropDown, setDropDown] = useState(false);
   const [userData, setUserData] = useState(null);
   const userId = useSelector((state) => state.toptiertrade.user); 
+  const Nav = useNavigate()
+  const dispatch = useDispatch()
 
   const getOne = async () => {    
     try {
@@ -26,9 +32,23 @@ const SidebarSub = ({toggleSidebar}) => {
     }
   };
 
+ const handleAcctNav = () =>{
+  toggleSidebar()
+  Nav('account-settings')
+  setShowButton(false)
+ }
+  
+  const handleLogout = () =>{
+    dispatch(logout())
+    Nav('/')
+  }
+
+ 
   useEffect(() => {
     if (userId) getOne();
   }, [userId]);
+
+
 
   return (
     <div className='Sidebar'>
@@ -37,7 +57,7 @@ const SidebarSub = ({toggleSidebar}) => {
         {userData?.fullName || 'User'}
           <MdOutlineArrowDropDown cursor={'pointer'} onClick={() => setShowButton(!showButton)} />
         </span>
-        {showButton ? <button>Account settings</button> : null}
+        {showButton ? <button onClick={()=>handleAcctNav()}> Account settings</button> : null}
       </div>
       <div className="sideBarContent">
         <button  onClick={toggleSidebar}>
@@ -79,7 +99,7 @@ const SidebarSub = ({toggleSidebar}) => {
         <div className="dropDown">
           <span>
             <NavLink 
-              to="/invest" 
+              // to="invest" 
               className={({ isActive }) => (isActive ? 'activeLink dropA' : 'dropA')}>
               <p><LuRecycle size={25} /> Invest</p>  
               <MdOutlineArrowDropDown cursor={'pointer'} onClick={() => setDropDown(!dropDown)} />
@@ -87,7 +107,7 @@ const SidebarSub = ({toggleSidebar}) => {
           </span>
           {dropDown ? (
             <ul>
-              <li>Subscription to a plan</li>
+              <li onClick={()=>(Nav('buy-plan'),toggleSidebar())}>Subscription to a plan</li>
               <li>My Investment</li>
             </ul>
           ) : null}
@@ -106,6 +126,7 @@ const SidebarSub = ({toggleSidebar}) => {
             <IoMdHelpBuoy size={25} /> Help/Support
           </NavLink>
         </button>
+        <button onClick={()=>handleLogout()} className='logout'><MdLogout size={25}/>Log out</button>
       </div>
     </div>
   );

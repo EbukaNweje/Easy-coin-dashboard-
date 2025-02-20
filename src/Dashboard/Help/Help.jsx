@@ -6,9 +6,9 @@ const Help = () => {
     <div className='Help'>
         <div className="helpWrap">
           <div className="helpHead">
-          <h1>Easy Coin Signal Support</h1>
+          <h1>Toptiertrade</h1>
             <span>For inquiries, suggestions or complains. Mail us</span>
-            <h3>support@easycoinsignal.com</h3>
+            <h3>support@Toptiertrade.com</h3>
           </div>
           <div className="helpContent">
             <section>

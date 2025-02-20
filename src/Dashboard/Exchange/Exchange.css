@@ -144,6 +144,9 @@
 }
 
 @media (min-width: 320px) and (max-width: 768px) {
+    .Exchange{
+        width: 100vw;
+    }
     .Exchange .exchangeBoxHolder section{
         width: 100%;
     }

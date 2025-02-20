@@ -3,6 +3,8 @@ import "./Dashboard.css";
 import { IoMenuOutline } from "react-icons/io5";
 import { IoMdPerson, IoMdArrowDropup } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "../Global/Slice";
 
 const AhmDashHeader = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -18,11 +20,17 @@ const AhmDashHeader = () => {
   };
 
   const nav = useNavigate()
+  const dispatch = useDispatch()
 
   const handleNav = () => {
     nav('/dashboard/account-settings'); 
     setShowProfile(!showProfile);
   };
+
+  const handleLogout = () =>{
+    dispatch(logout())
+    nav('/')
+  }
 
   return (
     <div className="AhmDashHeader">
@@ -69,7 +77,7 @@ const AhmDashHeader = () => {
                 <span>widthdraw</span>
                 <span>Buy plan</span>
               </section>
-              <section style={{borderBottom: 'none'}}>
+              <section style={{borderBottom: 'none'}} onClick={()=>handleLogout()}>
                 <span>Logout</span>
               </section>
             </div>

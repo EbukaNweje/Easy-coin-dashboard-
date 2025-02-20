@@ -141,7 +141,6 @@
         border-bottom-right-radius: 5px;
 }
 
-/* Investment Table Styling */
 .investmentTable {
     width: 100%;
     border-collapse: collapse;
@@ -177,7 +176,6 @@
     color: var(--text-color);
 }
 
-/* Status Badge */
 .investmentTable td:last-child {
     font-weight: 600;
     text-transform: capitalize;
@@ -195,7 +193,11 @@
     color: #e74c3c;
 }
 
-@media (max-width: 768px) {
+@media (min-width: 320px) and (max-width: 768px) {
+    .Plan{
+        width: 100vw;
+    }
+    
     .investmentTable th, .investmentTable td {
         font-size: 14px;
         padding: 10px;

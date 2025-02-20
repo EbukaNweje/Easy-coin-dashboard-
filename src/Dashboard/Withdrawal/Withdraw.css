@@ -111,3 +111,9 @@
     padding: 20px;
     
 }
+
+@media (min-width: 320px)  and (max-width: 768px){
+    .Withdrawls, .withFunds{
+        width: 100vw;
+    }
+}

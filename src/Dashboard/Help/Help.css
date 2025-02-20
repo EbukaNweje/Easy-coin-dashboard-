@@ -103,3 +103,16 @@
     align-items: center;
     justify-content: center;
 }
+
+@media (min-width: 320px) and (max-width: 768px){
+    .Help{
+        width: 100vw;
+    }
+
+    .Help .helpWrap{
+        width: 100%;
+    }
+    .helpContent section{
+        width: 100%;
+    }
+}

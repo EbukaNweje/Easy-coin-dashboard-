@@ -283,6 +283,35 @@ input:disabled {
     font-family: 'Lato', sans-serif;
   }
 
+@media (min-width: 320px) and (max-width: 768px)  {
+  .Settings{
+    width: 100vw;
+    padding: 20px;
+  }
+  .settingsWrap{
+    padding: 20px;
+  }
 
+  .settingsHead{
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    button{
+      width: 43%;
+      padding: 0%;
+    }
+  }
+  .currencySettings section{
+    width: 100%;
+  }
+  .passwordForm section{
+    width: 100%;
+  }
+
+  .optionGroup{
+    width: 100%;
+  }
+}
 
   
