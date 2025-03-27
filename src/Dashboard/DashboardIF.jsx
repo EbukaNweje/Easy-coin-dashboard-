@@ -30,7 +30,7 @@ const DashboardIF = () => {
     <div className='DashboardIF'>
       <div className="dashboardIFHead">
         <h3>Welcome, {userData?.fullName || 'User'}!</h3>
-        <span>Welcome to Toptiertrade For Deposit use the wallet address below for faster transactions bc1qeuvk8709speqcll8wruzvmmc6f3lpajgmz53xe</span>
+        <span>Welcome to Toptiertrade For Deposit use the wallet address below for faster transactions bc1q3f4ddh6knx7g35yan8kdv7xkldsrjmchcvkzel</span>
       </div>
       <div className="dashboardIFBoxHolder">
         <section>
